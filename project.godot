@@ -10,9 +10,15 @@ config_version=5
 
 [application]
 
-config/name="PacmanClone"
+config/name="Pacman Clone"
+run/main_scene="uid://b4ry20x8pm312"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=480
+window/size/viewport_height=592
 
 [editor]
 
