@@ -3,23 +3,46 @@ extends CharacterBody2D
 const TILE_SIZE = 16
 const SPEED = 80.0
 const LEFT_EXIT = -1
-const MAZE_WIDTH = 30   # whatever your map width is
+const MAZE_WIDTH = 30
 
 var current_direction := Vector2.ZERO
 var desired_direction := Vector2.ZERO
 
+var pellets_remaining := 0
+
 var target_position: Vector2
+var visual_centered := false
 
-@onready var maze = get_parent().get_node("TileMapLayer")
+@onready var maze = get_parent().get_node("MazeTileMap")
+@onready var pellets = get_parent().get_node("PelletTileMap")
+@onready var power_pellets = get_parent().get_node("PowerPelletTileMap")
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+signal pellet_eaten
+signal power_pellet_eaten
 
 func _ready() -> void:
 	var cell = maze.local_to_map(position)
 	position = maze.map_to_local(cell)
 	target_position = position
+	sprite.position.x -= TILE_SIZE / 2.0
+	
+	pellets_remaining = count_remaining_pellets()
 
-func _process(delta: float) -> void:
+func count_remaining_pellets() -> int:
+	var total = 0
+	for cell_pos in pellets.get_used_cells():
+		if pellets.get_cell_source_id(cell_pos) != -1:
+			total += 1
+	
+	for cell_pos in power_pellets.get_used_cells():
+		if power_pellets.get_cell_source_id(cell_pos) != -1:
+			total += 1
+	
+	return total
+
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		desired_direction = Vector2.UP
 	elif Input.is_action_just_pressed("ui_down"):
@@ -42,11 +65,16 @@ func can_move(dir: Vector2) -> bool:
 func _physics_process(delta):
 	if position.distance_to(target_position) < 1:
 		position = target_position
+		eat_pellet()
 		handle_screen_wrap()
 		if desired_direction != Vector2.ZERO and can_move(desired_direction):
 			current_direction = desired_direction
 			if current_direction != Vector2.ZERO:
-				animated_sprite_2d.rotation = current_direction.angle()
+				sprite.rotation = current_direction.angle()
+				if not visual_centered:
+					visual_centered = true
+					var tween = create_tween()
+					tween.tween_property(sprite, "position:x", 0.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		if not can_move(current_direction):
 			current_direction = Vector2.ZERO
 		if current_direction != Vector2.ZERO:
@@ -62,6 +90,23 @@ func _physics_process(delta):
 			position += (target_position - position).normalized() * step
 	else:
 		velocity = Vector2.ZERO
+
+func eat_pellet():
+	var cell = pellets.local_to_map(position)
+	if pellets.get_cell_tile_data(cell) != null:
+		pellets.erase_cell(cell)
+		pellets_remaining -= 1
+		emit_signal("pellet_eaten")
+	
+	cell = power_pellets.local_to_map(position)
+	if power_pellets.get_cell_tile_data(cell) != null:
+		power_pellets.erase_cell(cell)
+		pellets_remaining -= 1
+		emit_signal("power_pellet_eaten")
+			
+	if pellets_remaining <= 0:
+		print("YOU WIN")
+		get_tree().paused = true
 
 func handle_screen_wrap():
 	var cell = maze.local_to_map(position)
