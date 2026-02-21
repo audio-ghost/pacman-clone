@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const TILE_SIZE = 16
 const SPEED = 80.0
+const LEFT_EXIT = -1
+const MAZE_WIDTH = 30   # whatever your map width is
 
 var current_direction := Vector2.ZERO
 var desired_direction := Vector2.ZERO
@@ -26,12 +28,6 @@ func _process(delta: float) -> void:
 		desired_direction = Vector2.LEFT
 	elif Input.is_action_just_pressed("ui_right"):
 		desired_direction = Vector2.RIGHT
-		
-func is_at_tile_center() -> bool:
-	print("positionX:", position.x, "positionY:", position.y)
-	var remainder_x = fmod(position.x, TILE_SIZE)
-	var remainder_y = fmod(position.y, TILE_SIZE)
-	return abs(remainder_x) < 0.1 and abs(remainder_y) < 0.1
 
 func can_move(dir: Vector2) -> bool:
 	var next_pos = target_position + dir * TILE_SIZE
@@ -46,6 +42,7 @@ func can_move(dir: Vector2) -> bool:
 func _physics_process(delta):
 	if position.distance_to(target_position) < 1:
 		position = target_position
+		handle_screen_wrap()
 		if desired_direction != Vector2.ZERO and can_move(desired_direction):
 			current_direction = desired_direction
 			if current_direction != Vector2.ZERO:
@@ -65,3 +62,16 @@ func _physics_process(delta):
 			position += (target_position - position).normalized() * step
 	else:
 		velocity = Vector2.ZERO
+
+func handle_screen_wrap():
+	var cell = maze.local_to_map(position)
+
+	if cell.x < 0:
+		cell.x = MAZE_WIDTH - 1
+	elif cell.x >= MAZE_WIDTH:
+		cell.x = 0
+	else:
+		return
+
+	position = maze.map_to_local(cell)
+	target_position = position
