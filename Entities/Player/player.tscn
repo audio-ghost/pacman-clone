@@ -97,6 +97,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_mv1ah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -106,4 +107,4 @@ shape = SubResource("RectangleShape2D_mv1ah")
 sprite_frames = SubResource("SpriteFrames_xr8lj")
 animation = &"Default"
 autoplay = "Default"
-frame_progress = 0.87741745
+frame_progress = 0.7333721

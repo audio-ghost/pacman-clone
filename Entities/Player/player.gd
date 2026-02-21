@@ -2,16 +2,13 @@ extends CharacterBody2D
 
 const TILE_SIZE = 16
 const SPEED = 80.0
-const LEFT_EXIT = -1
 const MAZE_WIDTH = 30
 
 var current_direction := Vector2.ZERO
 var desired_direction := Vector2.ZERO
-
-var pellets_remaining := 0
-
 var target_position: Vector2
 var visual_centered := false
+var pellets_remaining := 0
 
 @onready var maze = get_parent().get_node("MazeTileMap")
 @onready var pellets = get_parent().get_node("PelletTileMap")
