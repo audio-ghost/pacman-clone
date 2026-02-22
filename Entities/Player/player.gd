@@ -11,6 +11,7 @@ var visual_centered := false
 var pellets_remaining := 0
 
 @onready var maze = get_parent().get_node("MazeTileMap")
+@onready var house_door = get_parent().get_node("DoorTileMap")
 @onready var pellets = get_parent().get_node("PelletTileMap")
 @onready var power_pellets = get_parent().get_node("PowerPelletTileMap")
 
@@ -53,11 +54,15 @@ func can_move(dir: Vector2) -> bool:
 	var next_pos = target_position + dir * TILE_SIZE
 	var cell = maze.local_to_map(next_pos)
 	var source_id = maze.get_cell_source_id(cell)
-	# -1 means empty
-	if source_id == -1:
-		return true
-	# Any tile present blocks movement
-	return false
+	# First, check main maze layer (walls)
+	if source_id != -1:
+		return false  # blocked by wall
+	# Now check door layer
+	var door_source_id = house_door.get_cell_source_id(cell)
+	if door_source_id != -1:
+		return false  # blocked otherwise
+
+	return true
 
 func _physics_process(delta):
 	if position.distance_to(target_position) < 1:

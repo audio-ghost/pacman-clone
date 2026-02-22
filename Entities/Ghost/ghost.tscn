@@ -450,14 +450,15 @@ shape = SubResource("RectangleShape2D_3uf7s")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o2lrn")
-animation = &"default_green"
-frame_progress = 0.06959799
+animation = &"default_red"
+frame_progress = 0.036733832
 
 [node name="FaceSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4oscr")
-animation = &"face_5"
+animation = &"face_8"
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
