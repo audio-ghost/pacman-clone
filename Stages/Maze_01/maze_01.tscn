@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=4 uid="uid://b4ry20x8pm312"]
+[gd_scene load_steps=13 format=4 uid="uid://b4ry20x8pm312"]
 
+[ext_resource type="Script" uid="uid://clveb1367bih8" path="res://Stages/Maze_01/maze_01.gd" id="1_351j6"]
 [ext_resource type="Texture2D" uid="uid://cu7aok3twwvu7" path="res://Assets/Map.png" id="1_w26tm"]
 [ext_resource type="Texture2D" uid="uid://cnc73ivtwo3ro" path="res://Stages/Tilesets/Map_TileSet 2-789b.png" id="2_xwjo0"]
 [ext_resource type="Texture2D" uid="uid://c83lh4iwgo415" path="res://Stages/Tilesets/Items.png" id="3_6npsc"]
@@ -534,6 +535,7 @@ sources/0 = SubResource("TileSetAtlasSource_fjoqf")
 size = Vector2(112, 64)
 
 [node name="Maze" type="Node2D"]
+script = ExtResource("1_351j6")
 
 [node name="Map" type="Sprite2D" parent="."]
 visible = false
@@ -560,27 +562,25 @@ tile_set = SubResource("TileSet_wurey")
 [node name="Player" parent="." instance=ExtResource("3_xwjo0")]
 position = Vector2(240, 472)
 
-[node name="Ghost" parent="." instance=ExtResource("5_fjoqf")]
+[node name="Ghosts" type="Node2D" parent="."]
+
+[node name="Ghost" parent="Ghosts" instance=ExtResource("5_fjoqf")]
 position = Vector2(208, 312)
-face_style = 7
 
-[node name="Ghost2" parent="." instance=ExtResource("5_fjoqf")]
+[node name="Ghost2" parent="Ghosts" instance=ExtResource("5_fjoqf")]
 position = Vector2(272, 312)
-body_color = 0
-face_style = 1
 personality = 1
+scatter_point = 1
 
-[node name="Ghost3" parent="." instance=ExtResource("5_fjoqf")]
+[node name="Ghost3" parent="Ghosts" instance=ExtResource("5_fjoqf")]
 position = Vector2(233, 328)
-body_color = 1
-face_style = 2
 personality = 2
+scatter_point = 2
 
-[node name="Ghost4" parent="." instance=ExtResource("5_fjoqf")]
+[node name="Ghost4" parent="Ghosts" instance=ExtResource("5_fjoqf")]
 position = Vector2(256, 344)
-body_color = 4
-face_style = 4
 personality = 3
+scatter_point = 3
 
 [node name="GhostHouse" type="Node2D" parent="."]
 visible = false
@@ -593,3 +593,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GhostHouse/HouseArea"]
 position = Vector2(240, 328)
 shape = SubResource("RectangleShape2D_wurey")
+
+[connection signal="power_pellet_eaten" from="Player" to="." method="_on_player_power_pellet_eaten"]
