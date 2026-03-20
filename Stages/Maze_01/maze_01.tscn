@@ -532,7 +532,7 @@ texture = ExtResource("3_6npsc")
 sources/0 = SubResource("TileSetAtlasSource_fjoqf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wurey"]
-size = Vector2(112, 64)
+size = Vector2(16, 16)
 
 [node name="Maze" type="Node2D"]
 script = ExtResource("1_351j6")
@@ -592,6 +592,23 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GhostHouse/HouseArea"]
 position = Vector2(240, 328)
+shape = SubResource("RectangleShape2D_wurey")
+
+[node name="RestartPoint" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RestartPoint"]
+position = Vector2(248, 328)
+shape = SubResource("RectangleShape2D_wurey")
+
+[node name="HouseExitPoint" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseExitPoint"]
+position = Vector2(248, 280)
 shape = SubResource("RectangleShape2D_wurey")
 
 [connection signal="power_pellet_eaten" from="Player" to="." method="_on_player_power_pellet_eaten"]

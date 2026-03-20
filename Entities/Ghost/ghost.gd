@@ -30,6 +30,7 @@ var body_base_position: Vector2
 var face_base_position: Vector2
 
 var house_outside_tile := Vector2(16, 18)
+var house_inside_tile := Vector2(16, 20)
 
 @export var personality: Personality = Personality.CHASER
 @export var scatter_point: ScatterPoint = ScatterPoint.TOP_LEFT
@@ -50,13 +51,14 @@ var start_position: Vector2
 @onready var pacman = get_parent().get_parent().get_node("Player")
 @onready var house = get_parent().get_parent().get_node("GhostHouse")
 @onready var house_area = get_parent().get_parent().get_node("GhostHouse/HouseArea")
+@onready var house_exit_point = get_parent().get_parent().get_node("HouseExitPoint")
+@onready var restart_point = get_parent().get_parent().get_node("RestartPoint")
 
 @onready var patrol_timer: Timer
 
 var ghost_mode: GhostMode = GhostMode.SCATTER
 
 func _ready():
-	house_outside_tile = maze_map.map_to_local(Vector2(16, 18))
 	var cell = maze_map.local_to_map(position)
 	position = maze_map.map_to_local(cell)
 	target_position = position
@@ -69,7 +71,8 @@ func _ready():
 	
 	hitbox.body_entered.connect(_on_body_entered)
 	house.register_ghost(self)
-	house_area.body_exited.connect(_on_house_exited)
+	house_exit_point.body_entered.connect(_on_house_exit_point_entered)
+	restart_point.body_entered.connect(_on_restart_point_entered)
 	setup_ghost_by_personality()
 
 
@@ -145,10 +148,7 @@ func _physics_process(delta):
 		choose_direction()
 		update_face_position()
 		target_position += current_direction * TILE_SIZE
-	
-	if state == GhostState.EXITING and position == house_outside_tile:
-		state = GhostState.ACTIVE
-	
+
 	if state == GhostState.FRIGHTENED:
 		update_frightened_flash()
 		frightened_timer -= delta
@@ -206,7 +206,7 @@ func choose_direction():
 		GhostState.IN_HOUSE:
 			in_house_patrol()
 		GhostState.EXITING:
-			choose_target_direction(house_outside_tile)
+			choose_target_direction(maze_map.map_to_local(house_outside_tile))
 		GhostState.ACTIVE:
 			if ghost_mode == GhostMode.SCATTER:
 				choose_target_direction(maze_map.map_to_local(get_scatter_target()))
@@ -225,6 +225,8 @@ func choose_direction():
 						choose_target_direction(maze_map.map_to_local(patrol_target))
 		GhostState.FRIGHTENED:
 			choose_flee_direction(pacman.position)
+		GhostState.EATEN:
+			choose_target_direction(maze_map.map_to_local(house_inside_tile))
 
 
 func in_house_patrol():
@@ -357,9 +359,14 @@ func _on_body_entered(body):
 		body.die()
 
 
-func _on_house_exited(body):
+func _on_house_exit_point_entered(body):
 	if body == self and state == GhostState.EXITING:
 		state = GhostState.ACTIVE
+
+
+func _on_restart_point_entered(body):
+	if body == self and state == GhostState.EATEN:
+		reset_to_start(false)
 
 
 func enter_frightened(duration: float):
@@ -388,6 +395,8 @@ func exit_frightened():
 func enter_eaten():
 	state = GhostState.EATEN
 	set_eaten_sprite()
+	reverse_direction()
+	ghost_speed = DEFAULT_SPEED * 1.5
 
 
 func set_eaten_sprite():
@@ -407,12 +416,13 @@ func set_mode(mode):
 	ghost_mode = mode
 
 
-func reset_to_start():
-	position = start_position
-	target_position = position
-	current_direction = Vector2.ZERO
-	
+func reset_to_start(include_position: bool):
 	state = GhostState.IN_HOUSE
+	if include_position:
+		position = start_position
+		target_position = position
+		current_direction = Vector2.ZERO
+	
 	house.register_ghost(self)
 	setup_ghost_by_personality()
 	frightened_timer = 0

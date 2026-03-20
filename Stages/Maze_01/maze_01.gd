@@ -61,4 +61,4 @@ func reset_level():
 	player.reset_to_start()
 	
 	for ghost in ghosts:
-		ghost.reset_to_start()
+		ghost.reset_to_start(true)
