@@ -1,5 +1,7 @@
 class_name GameConstants
 
+const GROUP_PLAYER = "Player"
+const GROUP_GHOSTS = "Ghosts"
 
 enum GhostMode {
 	SCATTER,

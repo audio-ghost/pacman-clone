@@ -9,6 +9,8 @@ var desired_direction := Vector2.ZERO
 var target_position: Vector2
 var visual_centered := false
 var pellets_remaining := 0
+var start_position: Vector2
+var is_dead := false
 
 @onready var maze = get_parent().get_node("MazeTileMap")
 @onready var house_door = get_parent().get_node("DoorTileMap")
@@ -19,14 +21,20 @@ var pellets_remaining := 0
 
 signal pellet_eaten
 signal power_pellet_eaten
+signal died
+
 
 func _ready() -> void:
 	var cell = maze.local_to_map(position)
 	position = maze.map_to_local(cell)
 	target_position = position
 	sprite.position.x -= TILE_SIZE / 2.0
+	start_position = position
 	
 	pellets_remaining = count_remaining_pellets()
+	
+	add_to_group(GameConstants.GROUP_PLAYER)
+
 
 func count_remaining_pellets() -> int:
 	var total = 0
@@ -40,6 +48,7 @@ func count_remaining_pellets() -> int:
 	
 	return total
 
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
 		desired_direction = Vector2.UP
@@ -49,6 +58,7 @@ func _process(_delta: float) -> void:
 		desired_direction = Vector2.LEFT
 	elif Input.is_action_just_pressed("ui_right"):
 		desired_direction = Vector2.RIGHT
+
 
 func can_move(dir: Vector2) -> bool:
 	var next_pos = target_position + dir * TILE_SIZE
@@ -64,7 +74,11 @@ func can_move(dir: Vector2) -> bool:
 
 	return true
 
+
 func _physics_process(delta):
+	if is_dead:
+		velocity = Vector2.ZERO
+		return
 	if position.distance_to(target_position) < 1:
 		position = target_position
 		eat_pellet()
@@ -93,6 +107,7 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 
+
 func eat_pellet():
 	var cell = pellets.local_to_map(position)
 	if pellets.get_cell_tile_data(cell) != null:
@@ -110,6 +125,7 @@ func eat_pellet():
 		print("YOU WIN")
 		get_tree().paused = true
 
+
 func handle_screen_wrap():
 	var cell = maze.local_to_map(position)
 
@@ -122,3 +138,19 @@ func handle_screen_wrap():
 
 	position = maze.map_to_local(cell)
 	target_position = position
+
+
+func die():
+	if is_dead:
+		return
+	
+	is_dead = true
+	died.emit()
+
+
+func reset_to_start():
+	position = start_position
+	target_position = position
+	current_direction = Vector2.ZERO
+	desired_direction = Vector2.ZERO
+	velocity = Vector2.ZERO

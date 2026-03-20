@@ -39,6 +39,7 @@ var float_amplitude: float = 3.0
 var float_speed: float = 1.0
 var float_phase: float = 0.0
 var float_time: float = 0.0
+var start_position: Vector2
 
 @onready var body_sprite: AnimatedSprite2D = $BodySprite
 @onready var face_sprite: AnimatedSprite2D = $FaceSprite
@@ -60,6 +61,7 @@ func _ready():
 	position = maze_map.map_to_local(cell)
 	target_position = position
 	ghost_speed = DEFAULT_SPEED
+	start_position = position
 	
 	body_base_position = body_sprite.position
 	face_base_position = face_sprite.position
@@ -344,11 +346,15 @@ func choose_new_patrol_target():
 
 
 func _on_body_entered(body):
-	if body.name == "Player":
-		if state == GhostState.FRIGHTENED:
-			enter_eaten()
-		else:
-			print("Pacman Caught!")
+	if not body.is_in_group(GameConstants.GROUP_PLAYER):
+		return
+		
+	if state == GhostState.FRIGHTENED:
+		enter_eaten()
+	elif state == GhostState.EATEN:
+		pass
+	else:
+		body.die()
 
 
 func _on_house_exited(body):
@@ -385,7 +391,10 @@ func enter_eaten():
 
 
 func set_eaten_sprite():
-	pass
+	body_sprite.animation = "eaten"
+	body_sprite.set_frame_and_progress(randi() % 8, 0)
+	body_sprite.pause()
+	face_sprite.visible = false
 
 
 func reverse_direction():
@@ -396,3 +405,14 @@ func set_mode(mode):
 	if state != GhostState.ACTIVE:
 		return
 	ghost_mode = mode
+
+
+func reset_to_start():
+	position = start_position
+	target_position = position
+	current_direction = Vector2.ZERO
+	
+	state = GhostState.IN_HOUSE
+	house.register_ghost(self)
+	setup_ghost_by_personality()
+	frightened_timer = 0

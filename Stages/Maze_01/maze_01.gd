@@ -21,7 +21,7 @@ var mode_index := 0
 var mode_timer := 0.0
 
 func _ready():
-	pass
+	player.died.connect(_on_player_died)
 
 
 func _process(delta: float) -> void:
@@ -49,3 +49,16 @@ func switch_mode():
 func _on_player_power_pellet_eaten() -> void:
 	for ghost in ghosts:
 		ghost.enter_frightened(8.0)
+
+
+func _on_player_died():
+	await get_tree().create_timer(1.0).timeout
+	reset_level()
+
+
+func reset_level():
+	player.is_dead = false
+	player.reset_to_start()
+	
+	for ghost in ghosts:
+		ghost.reset_to_start()
