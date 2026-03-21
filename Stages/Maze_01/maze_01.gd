@@ -19,6 +19,8 @@ var mode_durations = [
 
 var mode_index := 0
 var mode_timer := 0.0
+var player_lives := 3
+
 
 func _ready():
 	player.died.connect(_on_player_died)
@@ -52,8 +54,14 @@ func _on_player_power_pellet_eaten() -> void:
 
 
 func _on_player_died():
-	await get_tree().create_timer(2.0).timeout
-	reset_level()
+	player_lives -= 1
+	print("Lives remaining: ", player_lives)
+	
+	if player_lives > 0:
+		await get_tree().create_timer(2.0).timeout
+		reset_level()
+	else:
+		game_over()
 
 
 func reset_level():
@@ -62,3 +70,8 @@ func reset_level():
 	
 	for ghost in ghosts:
 		ghost.reset_to_start(true)
+
+
+func game_over():
+	print("GAME OVER")
+	get_tree().paused = true

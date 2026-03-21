@@ -350,7 +350,10 @@ func choose_new_patrol_target():
 func _on_body_entered(body):
 	if not body.is_in_group(GameConstants.GROUP_PLAYER):
 		return
-		
+	
+	if body.is_dead:
+		return
+	
 	if state == GhostState.FRIGHTENED:
 		enter_eaten()
 	elif state == GhostState.EATEN:
@@ -403,6 +406,7 @@ func set_eaten_sprite():
 	body_sprite.animation = "eaten"
 	body_sprite.set_frame_and_progress(randi() % 8, 0)
 	body_sprite.pause()
+	body_sprite.visible = true
 	face_sprite.visible = false
 
 
