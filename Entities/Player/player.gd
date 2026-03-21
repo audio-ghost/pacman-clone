@@ -146,6 +146,9 @@ func die():
 	
 	is_dead = true
 	died.emit()
+	
+	sprite.animation = "Die"
+	sprite.play()
 
 
 func reset_to_start():
@@ -154,3 +157,6 @@ func reset_to_start():
 	current_direction = Vector2.ZERO
 	desired_direction = Vector2.ZERO
 	velocity = Vector2.ZERO
+	
+	sprite.animation = "Default"
+	sprite.play()

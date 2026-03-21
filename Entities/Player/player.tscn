@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://pg33kjexpgwb"]
+[gd_scene load_steps=17 format=3 uid="uid://pg33kjexpgwb"]
 
 [ext_resource type="Script" uid="uid://c0sin3sg72vmn" path="res://Entities/Player/player.gd" id="1_mv1ah"]
 [ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="2_3uyv8"]
@@ -50,6 +50,10 @@ region = Rect2(37, 68, 24, 24)
 atlas = ExtResource("2_3uyv8")
 region = Rect2(69, 68, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uyv8"]
+atlas = ExtResource("2_3uyv8")
+region = Rect2(96, 64, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xr8lj"]
 animations = [{
 "frames": [{
@@ -90,6 +94,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_owvpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uyv8")
 }],
 "loop": false,
 "name": &"Die",
@@ -105,6 +112,5 @@ shape = SubResource("RectangleShape2D_mv1ah")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xr8lj")
-animation = &"Default"
+animation = &"Die"
 autoplay = "Default"
-frame_progress = 0.18859394
