@@ -5,6 +5,9 @@ const GhostMode = GameConstants.GhostMode
 @onready var player: CharacterBody2D = $Player
 @onready var ghosts := $Ghosts.get_children()
 
+@onready var lives_ui: CanvasLayer = $LivesUI
+@onready var game_over_ui: CanvasLayer = $GameOverUI
+
 var ghost_mode: GhostMode = GhostMode.SCATTER
 
 var mode_durations = [
@@ -24,6 +27,9 @@ var player_lives := 3
 
 func _ready():
 	player.died.connect(_on_player_died)
+	game_over_ui.restart_requested.connect(_on_restart_requested)
+	game_over_ui.exit_requested.connect(_on_exit_requested)
+	lives_ui.set_lives(player_lives)
 
 
 func _process(delta: float) -> void:
@@ -55,7 +61,8 @@ func _on_player_power_pellet_eaten() -> void:
 
 func _on_player_died():
 	player_lives -= 1
-	print("Lives remaining: ", player_lives)
+	
+	lives_ui.lose_life(player_lives)
 	
 	if player_lives > 0:
 		await get_tree().create_timer(2.0).timeout
@@ -73,5 +80,13 @@ func reset_level():
 
 
 func game_over():
-	print("GAME OVER")
-	get_tree().paused = true
+	await get_tree().create_timer(1.0).timeout
+	game_over_ui.show_game_over()
+
+
+func _on_restart_requested():
+	GameManager.restart_game()
+
+
+func _on_exit_requested():
+	GameManager.go_to_title()

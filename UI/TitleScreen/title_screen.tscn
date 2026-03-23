@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://tcw536dhfnka"]
+
+[ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_2te3s"]
+[ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/TitleScreen/title_screen.gd" id="1_qmakb"]
+[ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="3_nibll"]
+[ext_resource type="PackedScene" uid="uid://b2qd150pihxf" path="res://Entities/GhostVisual/ghost_visual.tscn" id="4_txoam"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nibll"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_txoam"]
+font_size = 24
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txoam"]
+atlas = ExtResource("3_nibll")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oby23"]
+atlas = ExtResource("3_nibll")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhosg"]
+atlas = ExtResource("3_nibll")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4b0x"]
+atlas = ExtResource("3_nibll")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_omg6k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txoam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oby23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhosg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4b0x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 640.0
+script = ExtResource("1_qmakb")
+
+[node name="Background" parent="." instance=ExtResource("1_2te3s")]
+layout_mode = 0
+color = Color(0, 0, 0, 1)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.0
+offset_top = 145.0
+offset_right = 137.0
+offset_bottom = 233.0
+grow_horizontal = 2
+text = "PACMAN"
+label_settings = SubResource("LabelSettings_nibll")
+
+[node name="StartLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.5
+offset_top = 400.0
+offset_right = 108.5
+offset_bottom = 434.0
+grow_horizontal = 2
+text = "Pres ENTER to play"
+label_settings = SubResource("LabelSettings_txoam")
+
+[node name="Attract Layer" type="Node2D" parent="."]
+
+[node name="Pacman" type="AnimatedSprite2D" parent="Attract Layer"]
+position = Vector2(-64, 312)
+sprite_frames = SubResource("SpriteFrames_omg6k")
+autoplay = "default"
+
+[node name="Ghosts" type="Node2D" parent="Attract Layer"]
+
+[node name="GhostVisual1" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+position = Vector2(-128, 312)
+
+[node name="GhostVisual2" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+position = Vector2(-160, 312)
+ghost_color = 1
+
+[node name="GhostVisual3" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+position = Vector2(-192, 312)
+ghost_color = 2
+
+[node name="GhostVisual4" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+position = Vector2(-224, 312)
+ghost_color = 3

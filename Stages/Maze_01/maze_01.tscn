@@ -1,12 +1,15 @@
-[gd_scene load_steps=13 format=4 uid="uid://b4ry20x8pm312"]
+[gd_scene load_steps=16 format=4 uid="uid://b4ry20x8pm312"]
 
 [ext_resource type="Script" uid="uid://clveb1367bih8" path="res://Stages/Maze_01/maze_01.gd" id="1_351j6"]
 [ext_resource type="Texture2D" uid="uid://cu7aok3twwvu7" path="res://Assets/Map.png" id="1_w26tm"]
+[ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="2_3dn2w"]
 [ext_resource type="Texture2D" uid="uid://cnc73ivtwo3ro" path="res://Stages/Tilesets/Map_TileSet 2-789b.png" id="2_xwjo0"]
 [ext_resource type="Texture2D" uid="uid://c83lh4iwgo415" path="res://Stages/Tilesets/Items.png" id="3_6npsc"]
 [ext_resource type="PackedScene" uid="uid://pg33kjexpgwb" path="res://Entities/Player/player.tscn" id="3_xwjo0"]
 [ext_resource type="PackedScene" uid="uid://dwq7nd027qc5d" path="res://Entities/Ghost/ghost.tscn" id="5_fjoqf"]
 [ext_resource type="Script" uid="uid://knkq0u23y4rd" path="res://Stages/Maze_01/ghost_house.gd" id="6_wurey"]
+[ext_resource type="PackedScene" uid="uid://ekinoevwlko3" path="res://UI/LivesUI/lives_ui.tscn" id="8_uj6b4"]
+[ext_resource type="PackedScene" uid="uid://d1833hwaqc7b5" path="res://UI/GameOverUI/game_over_ui.tscn" id="10_hniiv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6npsc"]
 texture = ExtResource("2_xwjo0")
@@ -537,6 +540,9 @@ size = Vector2(16, 16)
 [node name="Maze" type="Node2D"]
 script = ExtResource("1_351j6")
 
+[node name="Background" parent="." instance=ExtResource("2_3dn2w")]
+color = Color(0, 0, 0, 1)
+
 [node name="Map" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(240, 320)
@@ -610,5 +616,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseExitPoint"]
 position = Vector2(248, 280)
 shape = SubResource("RectangleShape2D_wurey")
+
+[node name="LivesUI" parent="." instance=ExtResource("8_uj6b4")]
+
+[node name="GameOverUI" parent="." instance=ExtResource("10_hniiv")]
 
 [connection signal="power_pellet_eaten" from="Player" to="." method="_on_player_power_pellet_eaten"]

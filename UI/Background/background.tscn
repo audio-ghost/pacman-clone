@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvwd6n3hgpfhp"]
+
+[ext_resource type="Script" uid="uid://pv4gtges16ml" path="res://UI/Background/background.gd" id="1_1y4cr"]
+
+[node name="Background" type="ColorRect"]
+offset_right = 480.0
+offset_bottom = 640.0
+script = ExtResource("1_1y4cr")
