@@ -6,6 +6,7 @@ const GhostMode = GameConstants.GhostMode
 @onready var ghosts := $Ghosts.get_children()
 
 @onready var lives_ui: CanvasLayer = $LivesUI
+@onready var pause_ui: CanvasLayer = $PauseUI
 @onready var game_over_ui: CanvasLayer = $GameOverUI
 
 var ghost_mode: GhostMode = GhostMode.SCATTER
@@ -27,12 +28,18 @@ var player_lives := 3
 
 func _ready():
 	player.died.connect(_on_player_died)
+	pause_ui.resume_requested.connect(_on_resume_requested)
+	pause_ui.exit_requested.connect(_on_exit_requested)
 	game_over_ui.restart_requested.connect(_on_restart_requested)
 	game_over_ui.exit_requested.connect(_on_exit_requested)
 	lives_ui.set_lives(player_lives)
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		if pause_ui.visible:
+			return
+		pause_game()
 	if mode_index >= mode_durations.size():
 		return
 	
@@ -84,9 +91,24 @@ func game_over():
 	game_over_ui.show_game_over()
 
 
+func pause_game():
+	if player.is_dead:
+		return
+	if game_over_ui.visible:
+		return
+	get_tree().paused = true
+	pause_ui.show_pause_overlay()
+
+
+func _on_resume_requested():
+	pause_ui.hide_pause_overlay()
+	get_tree().paused = false
+
+
 func _on_restart_requested():
 	GameManager.restart_game()
 
 
 func _on_exit_requested():
+	get_tree().paused = false
 	GameManager.go_to_title()

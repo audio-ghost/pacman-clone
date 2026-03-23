@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b4ry20x8pm312"]
+[gd_scene load_steps=17 format=4 uid="uid://b4ry20x8pm312"]
 
 [ext_resource type="Script" uid="uid://clveb1367bih8" path="res://Stages/Maze_01/maze_01.gd" id="1_351j6"]
 [ext_resource type="Texture2D" uid="uid://cu7aok3twwvu7" path="res://Assets/Map.png" id="1_w26tm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://knkq0u23y4rd" path="res://Stages/Maze_01/ghost_house.gd" id="6_wurey"]
 [ext_resource type="PackedScene" uid="uid://ekinoevwlko3" path="res://UI/LivesUI/lives_ui.tscn" id="8_uj6b4"]
 [ext_resource type="PackedScene" uid="uid://d1833hwaqc7b5" path="res://UI/GameOverUI/game_over_ui.tscn" id="10_hniiv"]
+[ext_resource type="PackedScene" uid="uid://bca23w752mp5j" path="res://UI/PauseUI/pause_ui.tscn" id="11_nsv0w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6npsc"]
 texture = ExtResource("2_xwjo0")
@@ -618,6 +619,8 @@ position = Vector2(248, 280)
 shape = SubResource("RectangleShape2D_wurey")
 
 [node name="LivesUI" parent="." instance=ExtResource("8_uj6b4")]
+
+[node name="PauseUI" parent="." instance=ExtResource("11_nsv0w")]
 
 [node name="GameOverUI" parent="." instance=ExtResource("10_hniiv")]
 
