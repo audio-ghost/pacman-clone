@@ -22,6 +22,7 @@ var is_dead := false
 signal pellet_eaten
 signal power_pellet_eaten
 signal died
+signal level_complete
 
 
 func _ready() -> void:
@@ -113,17 +114,18 @@ func eat_pellet():
 	if pellets.get_cell_tile_data(cell) != null:
 		pellets.erase_cell(cell)
 		pellets_remaining -= 1
+		GameManager.add_score(10)
 		emit_signal("pellet_eaten")
 	
 	cell = power_pellets.local_to_map(position)
 	if power_pellets.get_cell_tile_data(cell) != null:
 		power_pellets.erase_cell(cell)
 		pellets_remaining -= 1
+		GameManager.add_score(50)
 		emit_signal("power_pellet_eaten")
 			
 	if pellets_remaining <= 0:
-		print("YOU WIN")
-		get_tree().paused = true
+		level_complete.emit()
 
 
 func handle_screen_wrap():

@@ -1,12 +1,17 @@
 extends Control
 
 @onready var start_label: Label = $StartLabel
+@onready var high_score_label: Label = $HBoxContainer/HighScoreLabel
 @onready var pacman: AnimatedSprite2D = $"Attract Layer/Pacman"
 @onready var ghosts := $"Attract Layer/Ghosts".get_children()
 
 var attract_timer := 0.0
 var phase := 0
 var speed = 100
+
+
+func _ready():
+	high_score_label.text = "%06d" % GameManager.high_score
 
 
 func _process(delta: float) -> void:

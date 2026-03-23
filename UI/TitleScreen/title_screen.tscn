@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tcw536dhfnka"]
+[gd_scene load_steps=14 format=3 uid="uid://tcw536dhfnka"]
 
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_2te3s"]
 [ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/TitleScreen/title_screen.gd" id="1_qmakb"]
@@ -46,6 +46,12 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oby23"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_vhosg"]
+font_size = 24
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -107,3 +113,29 @@ ghost_color = 2
 [node name="GhostVisual4" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
 position = Vector2(-224, 312)
 ghost_color = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = 128.0
+offset_right = 112.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HighScore" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "High Score"
+label_settings = SubResource("LabelSettings_oby23")
+
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "000000"
+label_settings = SubResource("LabelSettings_vhosg")

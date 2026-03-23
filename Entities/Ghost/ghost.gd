@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal ghost_eaten
+
 const GhostMode = GameConstants.GhostMode
 const GhostState = GameConstants.GhostState
 const Personality = GameConstants.Personality
@@ -62,7 +64,7 @@ func _ready():
 	var cell = maze_map.local_to_map(position)
 	position = maze_map.map_to_local(cell)
 	target_position = position
-	ghost_speed = DEFAULT_SPEED
+	ghost_speed = level_adjusted_default_speed()
 	start_position = position
 	
 	body_base_position = body_sprite.position
@@ -75,6 +77,9 @@ func _ready():
 	restart_point.body_entered.connect(_on_restart_point_entered)
 	setup_ghost_by_personality()
 
+
+func level_adjusted_default_speed() -> float:
+	return DEFAULT_SPEED * GameManager.ghost_speed_multiplier()
 
 func setup_ghost_by_personality():
 	# Convert enum to string for animation/texture paths
@@ -91,13 +96,13 @@ func setup_ghost_by_personality():
 		match_personality = chameleon_personality
 	match match_personality:
 		Personality.CHASER:
-			ghost_speed = DEFAULT_SPEED
+			ghost_speed = level_adjusted_default_speed()
 		Personality.AMBUSHER:
-			ghost_speed = DEFAULT_SPEED
+			ghost_speed = level_adjusted_default_speed()
 		Personality.RANDOM:
-			ghost_speed = DEFAULT_SPEED * 0.8
+			ghost_speed = level_adjusted_default_speed() * 0.8
 		Personality.PATROL:
-			ghost_speed = DEFAULT_SPEED * 0.6
+			ghost_speed = level_adjusted_default_speed() * 0.7
 			choose_new_patrol_target()
 			patrol_timer = Timer.new()
 			patrol_timer.wait_time = 10.0
@@ -106,13 +111,13 @@ func setup_ghost_by_personality():
 			add_child(patrol_timer)
 			patrol_timer.start()
 		Personality.HUNTER:
-			ghost_speed = DEFAULT_SPEED * 0.6
+			ghost_speed = level_adjusted_default_speed() * 0.7
 		Personality.STATUE:
-			ghost_speed = DEFAULT_SPEED * 0.2
+			ghost_speed = level_adjusted_default_speed() * 0.4
 		Personality.CHAMELEON:
-			ghost_speed = DEFAULT_SPEED
+			ghost_speed = level_adjusted_default_speed()
 		Personality.SCAREDYCAT:
-			ghost_speed = DEFAULT_SPEED * 0.8
+			ghost_speed = level_adjusted_default_speed()
 
 
 func get_random_personality():
@@ -123,6 +128,7 @@ func get_random_personality():
 		Personality.PATROL
 	]
 	chameleon_personality = options.pick_random()
+
 
 func get_body_animation_name() -> String:
 	match personality:
@@ -373,12 +379,12 @@ func _on_restart_point_entered(body):
 
 
 func enter_frightened(duration: float):
-	if state != GhostState.ACTIVE:
+	if state != GhostState.ACTIVE and state != GhostState.FRIGHTENED:
 		return
 	
 	state = GhostState.FRIGHTENED
 	frightened_timer = duration
-	ghost_speed = DEFAULT_SPEED * 0.5
+	ghost_speed = level_adjusted_default_speed() * 0.5
 	reverse_direction()
 	set_frightened_sprite()
 
@@ -399,7 +405,8 @@ func enter_eaten():
 	state = GhostState.EATEN
 	set_eaten_sprite()
 	reverse_direction()
-	ghost_speed = DEFAULT_SPEED * 1.5
+	ghost_speed = level_adjusted_default_speed() * 1.5
+	ghost_eaten.emit()
 
 
 func set_eaten_sprite():

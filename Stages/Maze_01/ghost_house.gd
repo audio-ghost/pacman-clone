@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var release_delay := 4.0
+@export var release_delay := 3.0
 
 var ghosts_in_queue: Array = []
 var can_release := true

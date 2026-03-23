@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcf648u5r6fum"]
+
+[ext_resource type="Script" uid="uid://b6bmf5xwc7vqo" path="res://UI/ScoreUI/score_ui.gd" id="1_4jh02"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_daqju"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jh02"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_j7qon"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnwkp"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nnll"]
+font_size = 24
+
+[node name="ScoreUI" type="CanvasLayer"]
+script = ExtResource("1_4jh02")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 448.0
+offset_bottom = 110.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="YourScore" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Your Score"
+label_settings = SubResource("LabelSettings_daqju")
+
+[node name="YourScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "00000"
+label_settings = SubResource("LabelSettings_4jh02")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HighScore" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "High Score"
+label_settings = SubResource("LabelSettings_j7qon")
+
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "00000"
+label_settings = SubResource("LabelSettings_pnwkp")
+
+[node name="NewHighScore" type="Label" parent="."]
+visible = false
+offset_left = 264.0
+offset_top = 16.0
+offset_right = 468.0
+offset_bottom = 61.0
+text = "NEW                      !!"
+label_settings = SubResource("LabelSettings_0nnll")
