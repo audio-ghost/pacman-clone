@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dcf648u5r6fum"]
 
-[ext_resource type="Script" uid="uid://b6bmf5xwc7vqo" path="res://UI/ScoreUI/score_ui.gd" id="1_4jh02"]
+[ext_resource type="Script" uid="uid://b6bmf5xwc7vqo" path="res://UI/HUD/ScoreUI/score_ui.gd" id="1_4jh02"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_daqju"]
 font_size = 24

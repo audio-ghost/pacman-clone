@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1833hwaqc7b5"]
 
-[ext_resource type="Script" uid="uid://5i52s8ynwrxl" path="res://UI/GameOverUI/game_over_ui.gd" id="1_fb3ci"]
+[ext_resource type="Script" uid="uid://5i52s8ynwrxl" path="res://UI/Menu/GameOverUI/game_over_ui.gd" id="1_fb3ci"]
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_ssmmn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ssmmn"]

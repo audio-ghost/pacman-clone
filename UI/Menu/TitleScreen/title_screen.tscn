@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://tcw536dhfnka"]
 
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_2te3s"]
-[ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/TitleScreen/title_screen.gd" id="1_qmakb"]
+[ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/Menu/TitleScreen/title_screen.gd" id="1_qmakb"]
 [ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="3_nibll"]
 [ext_resource type="PackedScene" uid="uid://b2qd150pihxf" path="res://Entities/GhostVisual/ghost_visual.tscn" id="4_txoam"]
 

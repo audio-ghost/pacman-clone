@@ -30,7 +30,7 @@ func initialize_game():
 func go_to_title():
 	save_game()
 	initialize_game()
-	get_tree().change_scene_to_file("res://UI/TitleScreen/title_screen.tscn")
+	get_tree().change_scene_to_file("res://UI/Menu/TitleScreen/title_screen.tscn")
 
 
 func start_game():
@@ -95,5 +95,18 @@ func load_game():
 	if data != null and data.has("high_score"):
 		high_score = data["high_score"]
 
+
 func ghost_speed_multiplier() -> float:
 	return min(1.0 + (level - 1) * 0.04, 1.3)
+
+
+func get_fruit_score():
+	match level:
+		1: return 100
+		2: return 300
+		3: return 500
+		4: return 700
+		5: return 1000
+		6: return 2000
+		7: return 2000
+	return 5000

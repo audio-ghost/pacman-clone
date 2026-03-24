@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvurb1rito8hl"]
 
-[ext_resource type="Script" uid="uid://bakd1tqwaotks" path="res://UI/LevelCompleteUI/level_complete_ui.gd" id="1_5bfgr"]
+[ext_resource type="Script" uid="uid://bakd1tqwaotks" path="res://UI/Menu/LevelCompleteUI/level_complete_ui.gd" id="1_5bfgr"]
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="2_ajq73"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ssmmn"]

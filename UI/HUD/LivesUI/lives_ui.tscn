@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://ekinoevwlko3"]
 
-[ext_resource type="Script" uid="uid://cwpgxgr6gj7kd" path="res://UI/LivesUI/lives_ui.gd" id="1_5jeaa"]
+[ext_resource type="Script" uid="uid://cwpgxgr6gj7kd" path="res://UI/HUD/LivesUI/lives_ui.gd" id="1_5jeaa"]
 [ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="1_l5ya4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jeaa"]
