@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://tcw536dhfnka"]
+[gd_scene format=3 uid="uid://tcw536dhfnka"]
 
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_2te3s"]
 [ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/Menu/TitleScreen/title_screen.gd" id="1_qmakb"]
-[ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="3_nibll"]
+[ext_resource type="Texture2D" uid="uid://d4nipkc57jwl5" path="res://Entities/Player/Art/PacMan.png" id="3_nibll"]
 [ext_resource type="PackedScene" uid="uid://b2qd150pihxf" path="res://Entities/GhostVisual/ghost_visual.tscn" id="4_txoam"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nibll"]
@@ -53,18 +53,18 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_vhosg"]
 font_size = 24
 
-[node name="TitleScreen" type="Control"]
+[node name="TitleScreen" type="Control" unique_id=2055018755]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 640.0
 script = ExtResource("1_qmakb")
 
-[node name="Background" parent="." instance=ExtResource("1_2te3s")]
+[node name="Background" parent="." unique_id=1049094924 instance=ExtResource("1_2te3s")]
 layout_mode = 0
 color = Color(0, 0, 0, 1)
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=1030478953]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -77,7 +77,7 @@ grow_horizontal = 2
 text = "PACMAN"
 label_settings = SubResource("LabelSettings_nibll")
 
-[node name="StartLabel" type="Label" parent="."]
+[node name="StartLabel" type="Label" parent="." unique_id=835765269]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -90,31 +90,31 @@ grow_horizontal = 2
 text = "Pres ENTER to play"
 label_settings = SubResource("LabelSettings_txoam")
 
-[node name="Attract Layer" type="Node2D" parent="."]
+[node name="Attract Layer" type="Node2D" parent="." unique_id=77393017]
 
-[node name="Pacman" type="AnimatedSprite2D" parent="Attract Layer"]
+[node name="Pacman" type="AnimatedSprite2D" parent="Attract Layer" unique_id=704141714]
 position = Vector2(-64, 312)
 sprite_frames = SubResource("SpriteFrames_omg6k")
 autoplay = "default"
 
-[node name="Ghosts" type="Node2D" parent="Attract Layer"]
+[node name="Ghosts" type="Node2D" parent="Attract Layer" unique_id=662792271]
 
-[node name="GhostVisual1" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+[node name="GhostVisual1" parent="Attract Layer/Ghosts" unique_id=1451706170 instance=ExtResource("4_txoam")]
 position = Vector2(-128, 312)
 
-[node name="GhostVisual2" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+[node name="GhostVisual2" parent="Attract Layer/Ghosts" unique_id=9327051 instance=ExtResource("4_txoam")]
 position = Vector2(-160, 312)
 ghost_color = 1
 
-[node name="GhostVisual3" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+[node name="GhostVisual3" parent="Attract Layer/Ghosts" unique_id=556245951 instance=ExtResource("4_txoam")]
 position = Vector2(-192, 312)
 ghost_color = 2
 
-[node name="GhostVisual4" parent="Attract Layer/Ghosts" instance=ExtResource("4_txoam")]
+[node name="GhostVisual4" parent="Attract Layer/Ghosts" unique_id=1809015603 instance=ExtResource("4_txoam")]
 position = Vector2(-224, 312)
 ghost_color = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1066339009]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,13 +128,13 @@ offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HighScore" type="Label" parent="HBoxContainer"]
+[node name="HighScore" type="Label" parent="HBoxContainer" unique_id=900787904]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "High Score"
 label_settings = SubResource("LabelSettings_oby23")
 
-[node name="HighScoreLabel" type="Label" parent="HBoxContainer"]
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer" unique_id=1619117726]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "000000"

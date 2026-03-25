@@ -1,7 +1,7 @@
-[gd_scene load_steps=63 format=3 uid="uid://dwq7nd027qc5d"]
+[gd_scene format=3 uid="uid://dwq7nd027qc5d"]
 
 [ext_resource type="Script" uid="uid://cnik41pkm4rib" path="res://Entities/Ghost/ghost.gd" id="1_3uf7s"]
-[ext_resource type="Texture2D" uid="uid://ds60eiqcf6g26" path="res://Entities/Ghost/Art/Ghosts.png" id="1_5bopw"]
+[ext_resource type="Texture2D" uid="uid://cjdo37oo38ubs" path="res://Entities/Ghost/Art/Ghosts.png" id="1_5bopw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3uf7s"]
 size = Vector2(14, 14)
@@ -502,27 +502,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12wxv"]
 size = Vector2(16, 16)
 
-[node name="Ghost" type="CharacterBody2D"]
+[node name="Ghost" type="CharacterBody2D" unique_id=247101386]
 collision_layer = 4
 script = ExtResource("1_3uf7s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=459060738]
 shape = SubResource("RectangleShape2D_3uf7s")
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+[node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=534716915]
 sprite_frames = SubResource("SpriteFrames_o2lrn")
 animation = &"eaten"
 frame = 2
 frame_progress = 0.042112637
 
-[node name="FaceSprite" type="AnimatedSprite2D" parent="."]
+[node name="FaceSprite" type="AnimatedSprite2D" parent="." unique_id=1166160322]
 sprite_frames = SubResource("SpriteFrames_4oscr")
 animation = &"face_8"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1364094126]
 visible = false
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=468407834]
 shape = SubResource("RectangleShape2D_12wxv")

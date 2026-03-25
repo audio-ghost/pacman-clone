@@ -23,7 +23,7 @@ const GhostMode = GameConstants.GhostMode
 
 var ghost_mode: GhostMode = GhostMode.SCATTER
 
-var ghost_score_values = [200, 400, 800, 1600]
+var ghost_score_values = [200, 400, 800, 1600, 3200, 6400]
 var ghost_combo_index := 0
 
 var mode_durations = [
