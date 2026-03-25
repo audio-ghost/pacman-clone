@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal ghost_eaten
+signal ghost_eaten(position)
 
 const GhostMode = GameConstants.GhostMode
 const GhostState = GameConstants.GhostState
@@ -406,7 +406,7 @@ func enter_eaten():
 	set_eaten_sprite()
 	reverse_direction()
 	ghost_speed = level_adjusted_default_speed() * 1.5
-	ghost_eaten.emit()
+	ghost_eaten.emit(position)
 
 
 func set_eaten_sprite():

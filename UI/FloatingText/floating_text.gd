@@ -3,8 +3,17 @@ extends Node2D
 @onready var label: Label = $Label
 
 
-func setup(text: String):
-	label.text = text
+func setup(points: int):
+	label.text = str(points)
+	if points >= 1000:
+		label.modulate = Color.RED
+		label.scale = Vector2(1.8, 1.8)
+	elif points >= 600:
+		label.modulate = Color.ORANGE
+		label.scale = Vector2(1.5, 1.5)
+	elif points >= 300:
+		label.modulate = Color.YELLOW
+		label.scale = Vector2(1.3, 1.3)
 	animate()
 
 

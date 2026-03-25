@@ -114,3 +114,9 @@ shape = SubResource("RectangleShape2D_mv1ah")
 sprite_frames = SubResource("SpriteFrames_xr8lj")
 animation = &"Die"
 autoplay = "Default"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 480
+limit_bottom = 640

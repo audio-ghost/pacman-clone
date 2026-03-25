@@ -636,3 +636,8 @@ visible = false
 
 [node name="LevelCompleteUI" parent="." instance=ExtResource("13_1yy1g")]
 visible = false
+
+[node name="FlashRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 480.0
+offset_bottom = 640.0
