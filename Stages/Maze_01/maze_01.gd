@@ -170,23 +170,23 @@ func pellet_feedback():
 
 
 func play_pellet_sound():
-	var player = pellet_players[pellet_player_index]
+	var sound_player = pellet_players[pellet_player_index]
 	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
 	
-	player.stream = pellet_sounds[randi() % pellet_sounds.size()]
-	player.pitch_scale = randf_range(0.95, 1.05)
-	player.volume_db = randf_range(-2, 0)
-	player.play()
+	sound_player.stream = pellet_sounds[randi() % pellet_sounds.size()]
+	sound_player.pitch_scale = randf_range(0.95, 1.05)
+	sound_player.volume_db = randf_range(-2, 0)
+	sound_player.play()
 
 
 func play_power_pellet_sound():
-	var player = pellet_players[pellet_player_index]
+	var sound_player = pellet_players[pellet_player_index]
 	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
 	
-	player.stream = power_pellet_sound
-	player.pitch_scale = 1.0
-	player.volume_db = 0
-	player.play()
+	sound_player.stream = power_pellet_sound
+	sound_player.pitch_scale = 1.0
+	sound_player.volume_db = 0
+	sound_player.play()
 
 
 func power_pellet_eaten() -> void:
@@ -223,13 +223,13 @@ func _on_fruit_collected(points: int, pos: Vector2):
 
 
 func play_fruit_eaten_sound():
-	var player = pellet_players[pellet_player_index]
+	var sound_player = pellet_players[pellet_player_index]
 	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
 	
-	player.stream = fruit_eaten_sound
-	player.pitch_scale = 1.0
-	player.volume_db = 0
-	player.play()
+	sound_player.stream = fruit_eaten_sound
+	sound_player.pitch_scale = 1.0
+	sound_player.volume_db = 0
+	sound_player.play()
 
 
 func spawn_floating_text(points: int, world_pos: Vector2):
@@ -270,13 +270,13 @@ func ghost_combo_zoom():
 
 
 func play_ghost_eaten_sound():
-	var player = pellet_players[pellet_player_index]
+	var sound_player = pellet_players[pellet_player_index]
 	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
 	
-	player.stream = ghost_eaten_sound
-	player.pitch_scale = 1.0 + ghost_combo_index * 0.1
-	player.volume_db = 0 + ghost_combo_index * 2
-	player.play()
+	sound_player.stream = ghost_eaten_sound
+	sound_player.pitch_scale = 1.0 + ghost_combo_index * 0.1
+	sound_player.volume_db = 0 + ghost_combo_index * 2
+	sound_player.play()
 
 
 func flash_screen_big():
