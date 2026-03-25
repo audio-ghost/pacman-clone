@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dwq7nd027qc5d"]
 
 [ext_resource type="Script" uid="uid://cnik41pkm4rib" path="res://Entities/Ghost/ghost.gd" id="1_3uf7s"]
-[ext_resource type="Texture2D" uid="uid://cjdo37oo38ubs" path="res://Entities/Ghost/Art/Ghosts.png" id="1_5bopw"]
+[ext_resource type="Texture2D" uid="uid://ds60eiqcf6g26" path="res://Entities/Ghost/Art/Ghosts.png" id="1_5bopw"]
+[ext_resource type="AudioStream" uid="uid://c0tbs1ms3ty65" path="res://Entities/Ghost/SFX/ghost_chatter.wav" id="3_12wxv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3uf7s"]
 size = Vector2(14, 14)
@@ -526,3 +527,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=468407834]
 shape = SubResource("RectangleShape2D_12wxv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1622155206]
+stream = ExtResource("3_12wxv")
+max_distance = 161.0
+attenuation = 1.4640889
+bus = &"SFX"

@@ -15,6 +15,10 @@ var is_dead := false
 @onready var house_door = get_parent().get_node("DoorTileMap")
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var listener: AudioListener2D = $AudioListener2D
+
+var sound_die = preload("res://Entities/Player/SFX/player_die.wav")
 
 signal moved_to_cell(cell: Vector2i)
 signal died
@@ -28,6 +32,7 @@ func _ready() -> void:
 	start_position = position
 	
 	add_to_group(GameConstants.GROUP_PLAYER)
+	listener.make_current()
 
 
 func _process(_delta: float) -> void:
@@ -111,8 +116,14 @@ func die():
 	is_dead = true
 	died.emit()
 	
+	play_death_sound()
 	sprite.animation = "Die"
 	sprite.play()
+
+
+func play_death_sound():
+	player.stream = sound_die
+	player.play()
 
 
 func reset_to_start():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://pg33kjexpgwb"]
+[gd_scene format=3 uid="uid://pg33kjexpgwb"]
 
 [ext_resource type="Script" uid="uid://c0sin3sg72vmn" path="res://Entities/Player/player.gd" id="1_mv1ah"]
 [ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="2_3uyv8"]
@@ -103,20 +103,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=36488907]
 collision_layer = 2
 script = ExtResource("1_mv1ah")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1569281944]
 shape = SubResource("RectangleShape2D_mv1ah")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1891399443]
 sprite_frames = SubResource("SpriteFrames_xr8lj")
 animation = &"Die"
 autoplay = "Default"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1587819041]
 limit_left = 0
 limit_top = 0
 limit_right = 480
 limit_bottom = 640
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=748024424]
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=135287304]

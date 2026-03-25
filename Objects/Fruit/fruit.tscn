@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bepc3hmt0aacd"]
+[gd_scene format=3 uid="uid://bepc3hmt0aacd"]
 
 [ext_resource type="Script" uid="uid://dos25yi7q4mts" path="res://Objects/Fruit/fruit.gd" id="1_j8len"]
 [ext_resource type="Texture2D" uid="uid://c83lh4iwgo415" path="res://Objects/Fruit/Art/Items.png" id="2_le2tt"]
@@ -9,15 +9,17 @@ atlas = ExtResource("2_le2tt")
 [sub_resource type="CircleShape2D" id="CircleShape2D_le2tt"]
 radius = 8.0
 
-[node name="Fruit" type="Area2D"]
+[node name="Fruit" type="Area2D" unique_id=862661724]
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_j8len")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=758995206]
 texture = SubResource("AtlasTexture_cb7xy")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1501471571]
 shape = SubResource("CircleShape2D_le2tt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=143960132]

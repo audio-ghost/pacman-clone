@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1833hwaqc7b5"]
+[gd_scene format=3 uid="uid://d1833hwaqc7b5"]
 
 [ext_resource type="Script" uid="uid://5i52s8ynwrxl" path="res://UI/Menu/GameOverUI/game_over_ui.gd" id="1_fb3ci"]
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_ssmmn"]
@@ -6,14 +6,14 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ssmmn"]
 font_size = 64
 
-[node name="GameOverUI" type="CanvasLayer"]
+[node name="GameOverUI" type="CanvasLayer" unique_id=1759957644]
 script = ExtResource("1_fb3ci")
 
-[node name="Background" parent="." instance=ExtResource("1_ssmmn")]
+[node name="Background" parent="." unique_id=485916335 instance=ExtResource("1_ssmmn")]
 color = Color(0, 0, 0, 1)
 background_color = Color(0.019607844, 0.019607844, 0.078431375, 0.78431374)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1944714600]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,7 +29,7 @@ size_flags_horizontal = 4
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_ssmmn")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1218322897]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -42,10 +42,13 @@ offset_bottom = 122.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RestartButton" type="Button" parent="HBoxContainer"]
+[node name="RestartButton" type="Button" parent="HBoxContainer" unique_id=1760013351]
 layout_mode = 2
 text = "Restart"
 
-[node name="ExitButton" type="Button" parent="HBoxContainer"]
+[node name="ExitButton" type="Button" parent="HBoxContainer" unique_id=382270797]
 layout_mode = 2
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1198141747]
+bus = &"Music"

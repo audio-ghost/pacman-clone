@@ -12,6 +12,9 @@ var fruit_regions = {
 signal collected(points, position)
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var player: AudioStreamPlayer = $AudioStreamPlayer
+
+var sound_fruit_spawn = preload("res://Objects/Fruit/SFX/fruit_spawn.wav")
 
 
 func _ready() -> void:
@@ -21,6 +24,12 @@ func _ready() -> void:
 	
 	scale = Vector2.ZERO
 	pop_in()
+	play_fruit_spawn_sound()
+
+
+func play_fruit_spawn_sound():
+	player.stream = sound_fruit_spawn
+	player.play()
 
 
 func _on_body_entered(body):

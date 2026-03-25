@@ -4,6 +4,9 @@ extends Control
 @onready var high_score_label: Label = $HBoxContainer/HighScoreLabel
 @onready var pacman: AnimatedSprite2D = $"Attract Layer/Pacman"
 @onready var ghosts := $"Attract Layer/Ghosts".get_children()
+@onready var player: AudioStreamPlayer = $AudioStreamPlayer
+
+var music = preload("res://UI/Menu/TitleScreen/Sound/Retro Music - ABMU - ChipWave 01.wav")
 
 var attract_timer := 0.0
 var phase := 0
@@ -12,6 +15,8 @@ var speed = 100
 
 func _ready():
 	high_score_label.text = "%06d" % GameManager.high_score
+	player.stream = music
+	player.play()
 
 
 func _process(delta: float) -> void:

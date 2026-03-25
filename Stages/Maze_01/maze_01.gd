@@ -10,13 +10,30 @@ const GhostMode = GameConstants.GhostMode
 @onready var pellets: TileMapLayer = $PelletTileMap
 @onready var power_pellets: TileMapLayer = $PowerPelletTileMap
 
-@onready var score_ui: CanvasLayer = $ScoreUI
-@onready var lives_ui: CanvasLayer = $LivesUI
-@onready var pause_ui: CanvasLayer = $PauseUI
-@onready var game_over_ui: CanvasLayer = $GameOverUI
-@onready var level_complete_ui: CanvasLayer = $LevelCompleteUI
+@onready var score_ui: CanvasLayer = $UI/ScoreUI
+@onready var lives_ui: CanvasLayer = $UI/LivesUI
+@onready var pause_ui: CanvasLayer = $UI/PauseUI
+@onready var game_over_ui: CanvasLayer = $UI/GameOverUI
+@onready var level_complete_ui: CanvasLayer = $UI/LevelCompleteUI
 
 @onready var flash_rect: ColorRect = $FlashRect
+
+@onready var pellet_players = [
+	$SFX/PelletPlayer,
+	$SFX/PelletPlayer2,
+	$SFX/PelletPlayer3
+]
+
+var pellet_player_index := 0
+var pellet_sounds = [
+	preload("res://Stages/Maze_01/SFX/pellet_1.wav"),
+	preload("res://Stages/Maze_01/SFX/pellet_2.wav"),
+	preload("res://Stages/Maze_01/SFX/pellet_3.wav")
+]
+var power_pellet_sound = preload("res://Stages/Maze_01/SFX/power_pellet.wav")
+var fruit_eaten_sound = preload("res://Stages/Maze_01/SFX/fruit_eaten.wav")
+var ghost_eaten_sound = preload("res://Stages/Maze_01/SFX/ghost_eaten.wav")
+
 
 @export var fruit_scene: PackedScene
 @export var floating_text_scene: PackedScene
@@ -119,6 +136,7 @@ func _on_player_moved(cell: Vector2i):
 	if pellets.get_cell_tile_data(cell) != null:
 		pellets.erase_cell(cell)
 		pellets_remaining -= 1
+		play_pellet_sound()
 		GameManager.add_score(10)
 		flash_screen_subtle()
 		pellet_feedback()
@@ -126,6 +144,7 @@ func _on_player_moved(cell: Vector2i):
 		power_pellets.erase_cell(cell)
 		pellets_remaining -= 1
 		GameManager.add_score(50)
+		play_power_pellet_sound()
 		pellet_feedback()
 		flash_screen_moderate()
 		power_pellet_eaten()
@@ -148,6 +167,26 @@ func pellet_feedback():
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(player, "scale", Vector2(1.1, 1.1), 0.05)
 	tween.tween_property(player, "scale", Vector2(1, 1), 0.05)
+
+
+func play_pellet_sound():
+	var player = pellet_players[pellet_player_index]
+	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
+	
+	player.stream = pellet_sounds[randi() % pellet_sounds.size()]
+	player.pitch_scale = randf_range(0.95, 1.05)
+	player.volume_db = randf_range(-2, 0)
+	player.play()
+
+
+func play_power_pellet_sound():
+	var player = pellet_players[pellet_player_index]
+	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
+	
+	player.stream = power_pellet_sound
+	player.pitch_scale = 1.0
+	player.volume_db = 0
+	player.play()
 
 
 func power_pellet_eaten() -> void:
@@ -179,7 +218,18 @@ func spawn_fruit():
 func _on_fruit_collected(points: int, pos: Vector2):
 	GameManager.add_score(points)
 	spawn_floating_text(points, pos)
+	play_fruit_eaten_sound()
 	flash_screen_subtle()
+
+
+func play_fruit_eaten_sound():
+	var player = pellet_players[pellet_player_index]
+	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
+	
+	player.stream = fruit_eaten_sound
+	player.pitch_scale = 1.0
+	player.volume_db = 0
+	player.play()
 
 
 func spawn_floating_text(points: int, world_pos: Vector2):
@@ -202,6 +252,7 @@ func _on_ghost_eaten(pos: Vector2):
 	
 	ghost_combo_index += 1
 	ghost_combo_zoom()
+	play_ghost_eaten_sound()
 	flash_screen_big()
 
 
@@ -216,13 +267,16 @@ func ghost_combo_zoom():
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "zoom", target_zoom, 0.05)
 	tween.tween_property(camera, "zoom", base_zoom, 0.1)
+
+
+func play_ghost_eaten_sound():
+	var player = pellet_players[pellet_player_index]
+	pellet_player_index = (pellet_player_index + 1) %  pellet_players.size()
 	
-	# TODO - Pitch / volume manipulation after SFX are added
-	var pitch_scale = 1.0 + ghost_combo_index * 0.1
-	print("Pitch Scale: ", pitch_scale)
-	var base_volume = 1
-	var volume_db = base_volume + ghost_combo_index * 2
-	print("Volumee: ", volume_db)
+	player.stream = ghost_eaten_sound
+	player.pitch_scale = 1.0 + ghost_combo_index * 0.1
+	player.volume_db = 0 + ghost_combo_index * 2
+	player.play()
 
 
 func flash_screen_big():

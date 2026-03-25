@@ -47,6 +47,7 @@ var start_position: Vector2
 @onready var body_sprite: AnimatedSprite2D = $BodySprite
 @onready var face_sprite: AnimatedSprite2D = $FaceSprite
 @onready var hitbox: Area2D = $Hitbox
+@onready var player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @onready var maze_map = get_parent().get_parent().get_node("MazeTileMap")
 @onready var house_door = get_parent().get_parent().get_node("DoorTileMap")
@@ -57,6 +58,9 @@ var start_position: Vector2
 @onready var restart_point = get_parent().get_parent().get_node("RestartPoint")
 
 @onready var patrol_timer: Timer
+
+var ghost_chatter_sound = preload("res://Entities/Ghost/SFX/ghost_chatter.wav")
+var ghost_scared_Sound = preload("res://Entities/Ghost/SFX/ghost_scared.wav")
 
 var ghost_mode: GhostMode = GhostMode.SCATTER
 
@@ -118,6 +122,13 @@ func setup_ghost_by_personality():
 			ghost_speed = level_adjusted_default_speed()
 		Personality.SCAREDYCAT:
 			ghost_speed = level_adjusted_default_speed()
+	play_ghost_chatter_sound()
+
+
+func play_ghost_chatter_sound():
+	player.stream = ghost_chatter_sound
+	player.pitch_scale = randf_range(0.90, 1.1)
+	player.play()
 
 
 func get_random_personality():
@@ -387,6 +398,13 @@ func enter_frightened(duration: float):
 	ghost_speed = level_adjusted_default_speed() * 0.5
 	reverse_direction()
 	set_frightened_sprite()
+	play_ghost_scared_sound()
+
+
+func play_ghost_scared_sound():
+	player.stream = ghost_scared_Sound
+	player.pitch_scale = randf_range(0.7, 0.9)
+	player.play()
 
 
 func set_frightened_sprite():
@@ -407,6 +425,7 @@ func enter_eaten():
 	reverse_direction()
 	ghost_speed = level_adjusted_default_speed() * 1.5
 	ghost_eaten.emit(position)
+	player.stop()
 
 
 func set_eaten_sprite():

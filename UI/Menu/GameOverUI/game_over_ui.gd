@@ -6,7 +6,9 @@ signal exit_requested
 @onready var label: Label = $Label
 @onready var restart_button: Button = $HBoxContainer/RestartButton
 @onready var exit_button: Button = $HBoxContainer/ExitButton
+@onready var player: AudioStreamPlayer = $AudioStreamPlayer
 
+var game_over_music = preload("res://UI/Menu/GameOverUI/Sound/Retro Music Loop - PV8 - NES Style 01.wav")
 
 func _ready():
 	hide()
@@ -23,12 +25,18 @@ func show_game_over():
 	show()
 	await get_tree().create_timer(1.0).timeout
 	show_buttons()
+	play_music()
 
 
 func show_buttons():
 	restart_button.show()
 	exit_button.show()
 	restart_button.grab_focus()
+
+
+func play_music():
+	player.stream = game_over_music
+	player.play()
 
 
 func _input(event):
@@ -43,8 +51,10 @@ func _input(event):
 
 
 func _on_restart_button_pressed():
+	player.stop()
 	restart_requested.emit()
 
 
 func _on_exit_button_pressed():
+	player.stop()
 	exit_requested.emit()
