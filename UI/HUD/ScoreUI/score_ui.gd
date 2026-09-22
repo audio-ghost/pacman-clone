@@ -22,6 +22,6 @@ func _on_high_score_changed():
 	high_score_label.text = "%06d" % GameManager.high_score
 
 
-func _process(delta):
+func _process(_delta):
 	if high_score_beat:
 		new_high_score.visible = int(Time.get_ticks_msec() / 500) % 2 == 0

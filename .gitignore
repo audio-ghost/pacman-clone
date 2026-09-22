@@ -1,116 +1,32 @@
-# ─────────────────────────────
-# 🎮 GODOT PROJECT FILES
-# ─────────────────────────────
 
-# Godot import cache (auto-generated, do not commit)
+# Godot
 .import/
+.godot/
 
-# Local Godot editor settings
+# Import metadata (IMPORTANT: keep tracked!)
+# *.import   <-- DO NOT IGNORE
+
+# Editor settings (local)
 .editor/
 .editor_settings-*.tres
 config_*.cfg
 
-# Local export settings (contain absolute paths)
-export_presets.cfg
-
-# Backup and temporary files
-*.tmp
-*.bak
-*.old
-*.backup
-*.log
-*.translation
-*.import
-
-# Cache folders (Godot 4 specific)
-.cache/
-.godot/
-
-# ─────────────────────────────
-# 💻 OS / SYSTEM FILES
-# ─────────────────────────────
-
-# macOS metadata
-.DS_Store
-.AppleDouble
-.LSOverride
-__MACOSX/
-
-# Windows metadata
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# ─────────────────────────────
-# 🧱 BUILD / EXPORT ARTIFACTS
-# ─────────────────────────────
-
-# Typical export directories
+# Export / build outputs
 build/
 bin/
 dist/
-exports/
-release/
 export/
-# Godot's export pack files
 *.pck
-*.zip
-*.exe
-*.app/
-*.dmg
-*.apk
-*.aab
-*.xcodeproj/
 
-# ─────────────────────────────
-# 🧰 DEVELOPMENT / TOOLS
-# ─────────────────────────────
+# OS junk
+.DS_Store
+Thumbs.db
 
-# VS Code settings
+# IDEs
 .vscode/
-
-# Rider / JetBrains IDEs
 .idea/
 
-# VS / Mono / C# generated files
-.mono/
-obj/
-*.csproj
-*.sln
-*.userprefs
-
-# Python virtualenvs (if using scripting tools)
-venv/
-.env/
-
-# Temporary notes or test assets
-temp/
-tmp/
-test_*/
-
-# ─────────────────────────────
-# 🔐 SECRETS / TOKENS
-# ─────────────────────────────
-
-# Local environment configs
-.env.local
-.env.*
-!env.example
-
-# Credentials or build keys
-*.key
-*.keystore
-*.pem
-*.crt
-*.p12
-
-# ─────────────────────────────
-# 🧩 OPTIONAL: GIT / VCS
-# ─────────────────────────────
-
-# Godot Git Plugin metadata (rarely useful to track)
-addons/godot-git-plugin/bin/
-addons/godot-git-plugin/libgit2/
-addons/godot-git-plugin/*.so
-addons/godot-git-plugin/*.dll
-addons/godot-git-plugin/*.dylib
+# Logs / temp
+*.log
+*.tmp
+*.bak

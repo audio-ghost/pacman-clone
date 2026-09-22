@@ -12,7 +12,7 @@ func _ready():
 	hide_pause_overlay()
 
 
-func _process(delta):
+func _process(_delta):
 	if visible:
 		label.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
 
