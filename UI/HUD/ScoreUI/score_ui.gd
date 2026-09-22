@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var your_score_label: Label = $HBoxContainer/VBoxContainer/YourScoreLabel
 @onready var high_score_label: Label = $HBoxContainer/VBoxContainer2/HighScoreLabel
 @onready var new_high_score: Label = $NewHighScore
+@onready var level_label: Label = $HBoxContainer/HBoxContainer/LevelLabel
 
 var high_score_beat := false
 var blink_time : float = 0.0
@@ -12,6 +13,7 @@ func _ready() -> void:
 	your_score_label.text = "%06d" % GameManager.score
 	high_score_label.text = "%06d" % GameManager.high_score
 	new_high_score.visible = false
+	level_label.text = "Level %02d" % GameManager.level
 	GameManager.score_changed.connect(_on_score_changed)
 	GameManager.high_score_changed.connect(_on_high_score_changed)
 
