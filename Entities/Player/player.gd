@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const TILE_SIZE = 16
-const SPEED = 80.0
+const SPEED = 100.0
 const MAZE_WIDTH = 30
 
 var current_direction := Vector2.ZERO

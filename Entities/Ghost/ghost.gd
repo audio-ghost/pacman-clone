@@ -8,7 +8,7 @@ const Personality = GameConstants.Personality
 const ScatterPoint = GameConstants.ScatterPoint
 
 const TILE_SIZE = 16
-const DEFAULT_SPEED = 70.0
+const DEFAULT_SPEED = 80.0
 const MAZE_WIDTH = 30
 const MAZE_TOP = 8
 const MAZE_BOTTOM = 37
