@@ -27,6 +27,8 @@ func _process(delta: float) -> void:
 		start_chase_sequence()
 	elif phase == 1 and attract_timer > 13:
 		start_frightened_sequence()
+	elif phase == 2 and attract_timer > 30:
+		reset_animation_sequence()
 
 	if phase == 1:
 		pacman.position.x += speed * delta
@@ -53,6 +55,7 @@ func start_chase_sequence():
 	for ghost in ghosts:
 		ghost.position = Vector2(x_position, 300)
 		x_position -= 40
+		ghost.setup_default_animations()
 
 
 func start_frightened_sequence():
@@ -66,6 +69,11 @@ func start_frightened_sequence():
 	x_position += 40
 	pacman.position = Vector2(x_position, 300)
 	pacman.rotation = Vector2.LEFT.angle()
+
+
+func reset_animation_sequence():
+	phase = 0
+	attract_timer = 0
 
 
 func _on_blink_timer_timeout() -> void:
