@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ekinoevwlko3"]
+[gd_scene format=3 uid="uid://ekinoevwlko3"]
 
 [ext_resource type="Script" uid="uid://cwpgxgr6gj7kd" path="res://UI/HUD/LivesUI/lives_ui.gd" id="1_5jeaa"]
-[ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="1_l5ya4"]
+[ext_resource type="Texture2D" uid="uid://d4nipkc57jwl5" path="res://Entities/Player/Art/PacMan.png" id="1_l5ya4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jeaa"]
 atlas = ExtResource("1_l5ya4")
@@ -100,20 +100,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="LivesUI" type="CanvasLayer"]
+[node name="LivesUI" type="CanvasLayer" unique_id=27593065]
 script = ExtResource("1_5jeaa")
 
-[node name="PlayerLife1" type="AnimatedSprite2D" parent="."]
+[node name="PlayerLife1" type="AnimatedSprite2D" parent="." unique_id=508018132]
 position = Vector2(64, 608)
 sprite_frames = SubResource("SpriteFrames_ajmrh")
 frame_progress = 0.23501182
 
-[node name="PlayerLife2" type="AnimatedSprite2D" parent="."]
+[node name="PlayerLife2" type="AnimatedSprite2D" parent="." unique_id=1900206441]
 position = Vector2(96, 608)
 sprite_frames = SubResource("SpriteFrames_ajmrh")
 frame_progress = 0.24345848
 
-[node name="PlayerLife3" type="AnimatedSprite2D" parent="."]
+[node name="PlayerLife3" type="AnimatedSprite2D" parent="." unique_id=546462653]
 position = Vector2(128, 608)
 sprite_frames = SubResource("SpriteFrames_ajmrh")
 frame_progress = 0.68978286

@@ -1,7 +1,7 @@
-[gd_scene load_steps=61 format=3 uid="uid://b2qd150pihxf"]
+[gd_scene format=3 uid="uid://b2qd150pihxf"]
 
 [ext_resource type="Script" uid="uid://d26ycd521dims" path="res://Entities/GhostVisual/ghost_visual.gd" id="1_i67mt"]
-[ext_resource type="Texture2D" uid="uid://ds60eiqcf6g26" path="res://Entities/Ghost/Art/Ghosts.png" id="2_m6pbj"]
+[ext_resource type="Texture2D" uid="uid://cjdo37oo38ubs" path="res://Entities/Ghost/Art/Ghosts.png" id="2_m6pbj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uf7s"]
 atlas = ExtResource("2_m6pbj")
@@ -496,14 +496,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="GhostVisual" type="Node2D"]
+[node name="GhostVisual" type="Node2D" unique_id=1732753194]
 script = ExtResource("1_i67mt")
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+[node name="BodySprite" type="AnimatedSprite2D" parent="." unique_id=1799018491]
 sprite_frames = SubResource("SpriteFrames_o2lrn")
 animation = &"default_blue"
 
-[node name="FaceSprite" type="AnimatedSprite2D" parent="."]
+[node name="FaceSprite" type="AnimatedSprite2D" parent="." unique_id=1754404848]
 sprite_frames = SubResource("SpriteFrames_4oscr")
 animation = &"face_3"
 offset = Vector2(2, 0)

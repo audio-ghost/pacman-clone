@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://pg33kjexpgwb"]
 
 [ext_resource type="Script" uid="uid://c0sin3sg72vmn" path="res://Entities/Player/player.gd" id="1_mv1ah"]
-[ext_resource type="Texture2D" uid="uid://dm6b0qj13h60m" path="res://Entities/Player/Art/PacMan.png" id="2_3uyv8"]
+[ext_resource type="Texture2D" uid="uid://d4nipkc57jwl5" path="res://Entities/Player/Art/PacMan.png" id="2_3uyv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv1ah"]
 size = Vector2(14, 14)
@@ -122,6 +122,5 @@ limit_right = 480
 limit_bottom = 640
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=748024424]
-bus = &"SFX"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=135287304]

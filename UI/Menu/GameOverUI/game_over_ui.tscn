@@ -51,4 +51,3 @@ layout_mode = 2
 text = "Exit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1198141747]
-bus = &"Music"

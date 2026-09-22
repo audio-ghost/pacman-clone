@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcf648u5r6fum"]
+[gd_scene format=3 uid="uid://dcf648u5r6fum"]
 
 [ext_resource type="Script" uid="uid://b6bmf5xwc7vqo" path="res://UI/HUD/ScoreUI/score_ui.gd" id="1_4jh02"]
 
@@ -17,48 +17,48 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_0nnll"]
 font_size = 24
 
-[node name="ScoreUI" type="CanvasLayer"]
+[node name="ScoreUI" type="CanvasLayer" unique_id=1008382661]
 script = ExtResource("1_4jh02")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=808354265]
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 448.0
 offset_bottom = 110.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=609340825]
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="YourScore" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="YourScore" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1416794100]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Your Score"
 label_settings = SubResource("LabelSettings_daqju")
 
-[node name="YourScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="YourScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=237962229]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "00000"
 label_settings = SubResource("LabelSettings_4jh02")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=1233049085]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HighScore" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="HighScore" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=1305564895]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "High Score"
 label_settings = SubResource("LabelSettings_j7qon")
 
-[node name="HighScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=842816623]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "00000"
 label_settings = SubResource("LabelSettings_pnwkp")
 
-[node name="NewHighScore" type="Label" parent="."]
+[node name="NewHighScore" type="Label" parent="." unique_id=1927288830]
 visible = false
 offset_left = 264.0
 offset_top = 16.0
