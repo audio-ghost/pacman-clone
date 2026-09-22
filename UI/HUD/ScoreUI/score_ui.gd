@@ -5,6 +5,8 @@ extends CanvasLayer
 @onready var new_high_score: Label = $NewHighScore
 
 var high_score_beat := false
+var blink_time : float = 0.0
+
 
 func _ready() -> void:
 	your_score_label.text = "%06d" % GameManager.score
@@ -22,6 +24,9 @@ func _on_high_score_changed():
 	high_score_label.text = "%06d" % GameManager.high_score
 
 
-func _process(_delta):
+func _process(delta):
 	if high_score_beat:
-		new_high_score.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
+		blink_time += delta
+		if blink_time > 0.5:
+			blink_time -= 0.5
+			new_high_score.visible = not new_high_score.visible

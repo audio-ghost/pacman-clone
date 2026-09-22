@@ -141,3 +141,7 @@ text = "000000"
 label_settings = SubResource("LabelSettings_vhosg")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=247882927]
+
+[node name="BlinkTimer" type="Timer" parent="." unique_id=264736780]
+wait_time = 0.5
+autostart = true

@@ -7,14 +7,19 @@ signal exit_requested
 @onready var resume_button: Button = $HBoxContainer/ResumeButton
 @onready var exit_button: Button = $HBoxContainer/ExitButton
 
+var blink_time : float = 0.0
+
 
 func _ready():
 	hide_pause_overlay()
 
 
-func _process(_delta):
+func _process(delta):
 	if visible:
-		label.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
+		blink_time += delta
+		if blink_time > 0.5:
+			blink_time -= 0.5
+			label.visible = not label.visible
 
 
 func hide_pause_overlay():

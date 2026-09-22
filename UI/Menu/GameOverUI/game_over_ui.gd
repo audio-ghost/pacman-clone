@@ -10,15 +10,21 @@ signal exit_requested
 
 var game_over_music = preload("res://UI/Menu/GameOverUI/Sound/Retro Music Loop - PV8 - NES Style 01.wav")
 
+var blink_time : float = 0.0
+
+
 func _ready():
 	hide()
 	restart_button.hide()
 	exit_button.hide()
 
 
-func _process(_delta):
+func _process(delta):
 	if visible:
-		label.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
+		blink_time += delta
+		if blink_time > 0.5:
+			blink_time -= 0.5
+			label.visible = not label.visible
 
 
 func show_game_over():

@@ -10,6 +10,8 @@ signal exit_requested
 
 var level_complete_music = preload("res://UI/Menu/LevelCompleteUI/Sound/Retro Music - WolfSynth - Tempo Normal - 02.wav")
 
+var blink_time : float = 0.0
+
 
 func _ready():
 	hide()
@@ -17,9 +19,12 @@ func _ready():
 	exit_button.hide()
 
 
-func _process(_delta):
+func _process(delta):
 	if visible:
-		label.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
+		blink_time += delta
+		if blink_time > 0.5:
+			blink_time -= 0.5
+			label.visible = not label.visible
 
 
 func show_level_complete():

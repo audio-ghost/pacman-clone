@@ -5,6 +5,7 @@ extends Control
 @onready var pacman: AnimatedSprite2D = $"Attract Layer/Pacman"
 @onready var ghosts := $"Attract Layer/Ghosts".get_children()
 @onready var player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var blink_timer: Timer = $BlinkTimer
 
 var music = preload("res://UI/Menu/TitleScreen/Sound/Retro Music - ABMU - ChipWave 01.wav")
 
@@ -14,14 +15,13 @@ var speed = 100
 
 
 func _ready():
+	blink_timer.timeout.connect(_on_blink_timer_timeout)
 	high_score_label.text = "%06d" % GameManager.high_score
 	player.stream = music
 	player.play()
 
 
 func _process(delta: float) -> void:
-	start_label.visible = int(Time.get_ticks_msec() / 500) % 2 == 0
-	
 	attract_timer += delta
 	if phase == 0 and attract_timer > 3:
 		start_chase_sequence()
@@ -66,3 +66,7 @@ func start_frightened_sequence():
 	x_position += 40
 	pacman.position = Vector2(x_position, 300)
 	pacman.rotation = Vector2.LEFT.angle()
+
+
+func _on_blink_timer_timeout() -> void:
+	start_label.visible = not start_label.visible
