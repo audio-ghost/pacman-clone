@@ -87,7 +87,7 @@ offset_top = 400.0
 offset_right = 108.5
 offset_bottom = 434.0
 grow_horizontal = 2
-text = "Pres ENTER to play"
+text = "Press ENTER to play"
 label_settings = SubResource("LabelSettings_txoam")
 
 [node name="Attract Layer" type="Node2D" parent="." unique_id=77393017]
