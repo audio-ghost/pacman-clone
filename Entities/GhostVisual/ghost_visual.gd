@@ -42,6 +42,7 @@ func setup_default_animations():
 		GhostColor.PINK:
 			body_sprite.play("default_pink")
 			face_sprite.play("face_3")
+	face_sprite.show()
 
 
 func setup_scared_animations():
