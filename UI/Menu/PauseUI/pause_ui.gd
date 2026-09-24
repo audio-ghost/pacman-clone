@@ -43,11 +43,14 @@ func _input(event):
 	if not visible:
 		return
 	
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ACCEPT"):
 		if resume_button.has_focus():
 			_on_resume_button_pressed()
 		elif exit_button.has_focus():
 			_on_exit_button_pressed()
+	elif event.is_action_pressed("PAUSE"):
+		_on_resume_button_pressed()
+		get_viewport().set_input_as_handled()
 
 
 func _on_resume_button_pressed():

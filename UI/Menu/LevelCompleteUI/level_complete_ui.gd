@@ -49,7 +49,7 @@ func _input(event):
 	if not visible:
 		return
 	
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ACCEPT"):
 		if next_level_button.has_focus():
 			_on_next_level_button_pressed()
 		elif exit_button.has_focus():

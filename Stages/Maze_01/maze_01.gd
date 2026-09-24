@@ -15,6 +15,7 @@ const GhostMode = GameConstants.GhostMode
 @onready var pause_ui: CanvasLayer = $UI/PauseUI
 @onready var game_over_ui: CanvasLayer = $UI/GameOverUI
 @onready var level_complete_ui: CanvasLayer = $UI/LevelCompleteUI
+@onready var pause_label: Label = $UI/PauseLabel
 
 @onready var flash_rect: ColorRect = $FlashRect
 
@@ -97,11 +98,14 @@ func count_remaining_pellets() -> int:
 	return total
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("PAUSE"):
 		if pause_ui.visible:
 			return
 		pause_game()
+
+
+func _process(delta: float) -> void:
 	if mode_index >= mode_durations.size():
 		return
 	
