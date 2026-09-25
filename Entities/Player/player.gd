@@ -30,12 +30,16 @@ func _ready() -> void:
 	target_position = position
 	sprite.position.x -= TILE_SIZE / 2.0
 	start_position = position
+	sprite.rotation = 0.0
 	
 	add_to_group(GameConstants.GROUP_PLAYER)
 	listener.make_current()
 
 
 func _process(_delta: float) -> void:
+	if GameManager.game_state != GameConstants.GameState.PLAYING:
+		return
+	
 	if Input.is_action_just_pressed("MOVE_UP"):
 		desired_direction = Vector2.UP
 	elif Input.is_action_just_pressed("MOVE_DOWN"):
@@ -132,6 +136,7 @@ func reset_to_start():
 	current_direction = Vector2.ZERO
 	desired_direction = Vector2.ZERO
 	velocity = Vector2.ZERO
+	sprite.rotation = 0.0
 	
 	sprite.animation = "Default"
 	sprite.play()

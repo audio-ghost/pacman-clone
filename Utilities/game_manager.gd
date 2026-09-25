@@ -3,6 +3,8 @@ extends Node
 signal score_changed
 signal high_score_changed
 
+const GameState = GameConstants.GameState
+
 const SAVE_PATH := "user://save_data.json"
 
 const DEFAULT_GHOST_SPEED = 70.0
@@ -12,6 +14,8 @@ var player_lives := 3
 var score := 0
 var high_score := 0
 var high_score_dirty := false
+
+var game_state : GameState = GameState.GET_READY
 
 
 func _ready():
@@ -25,6 +29,10 @@ func initialize_game():
 	player_lives = 3
 	score = 0
 	load_game()
+
+
+func set_game_state(state: GameState):
+	game_state = state
 
 
 func go_to_title():

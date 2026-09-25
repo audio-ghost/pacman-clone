@@ -542,7 +542,11 @@ sources/0 = SubResource("TileSetAtlasSource_fjoqf")
 size = Vector2(16, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sf3c4"]
+font_size = 24
 font_color = Color(1, 1, 1, 0.5019608)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i4vpt"]
+font_size = 24
 
 [sub_resource type="Animation" id="Animation_sf3c4"]
 resource_name = "PausePulse"
@@ -680,16 +684,24 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 193.0
-offset_top = 597.0
-offset_right = 297.0
-offset_bottom = 620.0
+offset_left = 281.0
+offset_top = 590.0
+offset_right = 437.0
+offset_bottom = 624.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Pause: Esc / P"
 label_settings = SubResource("LabelSettings_sf3c4")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ReadyLabel" type="Label" parent="UI" unique_id=702003918]
+offset_left = 168.0
+offset_top = 360.0
+offset_right = 314.0
+offset_bottom = 394.0
+text = "- Get Ready -"
+label_settings = SubResource("LabelSettings_i4vpt")
 
 [node name="FlashRect" type="ColorRect" parent="." unique_id=1053361830]
 visible = false
@@ -710,3 +722,6 @@ bus = &"SFX"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=226846980]
 libraries/ = SubResource("AnimationLibrary_11kac")
 autoplay = &"PausePulse"
+
+[node name="ReadyTimer" type="Timer" parent="." unique_id=405458451]
+wait_time = 1.5

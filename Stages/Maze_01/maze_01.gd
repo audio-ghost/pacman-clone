@@ -1,6 +1,7 @@
 extends Node2D
 
 const GhostMode = GameConstants.GhostMode
+const GameState = GameConstants.GameState
 
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Player/Camera2D
@@ -16,6 +17,8 @@ const GhostMode = GameConstants.GhostMode
 @onready var game_over_ui: CanvasLayer = $UI/GameOverUI
 @onready var level_complete_ui: CanvasLayer = $UI/LevelCompleteUI
 @onready var pause_label: Label = $UI/PauseLabel
+@onready var ready_label: Label = $UI/ReadyLabel
+@onready var ready_timer: Timer = $ReadyTimer
 
 @onready var flash_rect: ColorRect = $FlashRect
 
@@ -83,6 +86,15 @@ func _ready():
 		ghost.ghost_eaten.connect(_on_ghost_eaten)
 	
 	get_tree().paused = false
+	
+	ready_timer.timeout.connect(_on_ready_timer_timeout)
+	show_get_ready()
+
+
+func show_get_ready():
+	GameManager.set_game_state(GameState.GET_READY)
+	ready_label.visible = true
+	ready_timer.start()
 
 
 func count_remaining_pellets() -> int:
@@ -99,6 +111,8 @@ func count_remaining_pellets() -> int:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not GameState.PLAYING:
+		return
 	if event.is_action_pressed("PAUSE"):
 		if pause_ui.visible:
 			return
@@ -333,6 +347,8 @@ func reset_level():
 	
 	for ghost in ghosts:
 		ghost.reset_to_start(true)
+	
+	show_get_ready()
 
 
 func game_over():
@@ -366,3 +382,8 @@ func _on_next_level_requested():
 func _on_exit_requested():
 	get_tree().paused = false
 	GameManager.go_to_title()
+
+
+func _on_ready_timer_timeout():
+	ready_label.visible = false
+	GameManager.set_game_state(GameState.PLAYING)

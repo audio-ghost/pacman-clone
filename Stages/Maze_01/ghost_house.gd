@@ -9,6 +9,8 @@ func register_ghost(ghost):
 	ghosts_in_queue.append(ghost)
 
 func _process(_delta):
+	if GameManager.game_state != GameConstants.GameState.PLAYING:
+		return
 	if can_release and ghosts_in_queue.size() > 0:
 		release_next()
 

@@ -3,6 +3,13 @@ class_name GameConstants
 const GROUP_PLAYER = "Player"
 const GROUP_GHOSTS = "Ghosts"
 
+enum GameState {
+	GET_READY,
+	PLAYING,
+	LEVEL_COMPLETE,
+	GAME_OVER
+}
+
 enum GhostMode {
 	SCATTER,
 	CHASE
