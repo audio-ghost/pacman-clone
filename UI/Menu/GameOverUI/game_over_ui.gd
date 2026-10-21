@@ -42,7 +42,7 @@ func show_buttons():
 	restart_button.show()
 	exit_button.show()
 	restart_button.grab_focus()
-	restart_focus_indicator.modulate.a = 0.0
+	restart_focus_indicator.modulate.a = 1.0
 
 
 func play_music():
