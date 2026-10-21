@@ -2,9 +2,37 @@
 
 [ext_resource type="Script" uid="uid://5i52s8ynwrxl" path="res://UI/Menu/GameOverUI/game_over_ui.gd" id="1_fb3ci"]
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_ssmmn"]
+[ext_resource type="FontFile" uid="uid://d2ttwhsaicnm3" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="3_fmef6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ssmmn"]
-font_size = 64
+font = ExtResource("3_fmef6")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_vn1wu"]
+font = ExtResource("3_fmef6")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sepdw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fmef6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vn1wu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kujh5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_anxcg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kujh5"]
+font = ExtResource("3_fmef6")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uo2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m3oqc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jwgvg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcigm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_26246"]
 
 [node name="GameOverUI" type="CanvasLayer" unique_id=1759957644]
 script = ExtResource("1_fb3ci")
@@ -29,25 +57,57 @@ size_flags_horizontal = 4
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_ssmmn")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1218322897]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -53.0
-offset_top = 82.0
-offset_right = 53.0
-offset_bottom = 122.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1137172916]
+offset_left = 187.0
+offset_top = 470.0
+offset_right = 197.0
+offset_bottom = 536.0
 
-[node name="RestartButton" type="Button" parent="HBoxContainer" unique_id=1760013351]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1883900710]
 layout_mode = 2
+
+[node name="RestartFocusIndicator" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=275473768]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+text = ">"
+label_settings = SubResource("LabelSettings_vn1wu")
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=68256629]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fmef6")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sepdw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fmef6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vn1wu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kujh5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_anxcg")
 text = "Restart"
+alignment = 0
 
-[node name="ExitButton" type="Button" parent="HBoxContainer" unique_id=382270797]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1706244751]
 layout_mode = 2
+
+[node name="ExitFocusIndicator" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=397518004]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+text = ">"
+label_settings = SubResource("LabelSettings_kujh5")
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1724167292]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fmef6")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2uo2r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m3oqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jwgvg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vcigm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_26246")
 text = "Exit"
+alignment = 0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1198141747]
+
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_focus_exited"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer2/ExitButton" to="." method="_on_exit_button_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/HBoxContainer2/ExitButton" to="." method="_on_exit_button_focus_exited"]

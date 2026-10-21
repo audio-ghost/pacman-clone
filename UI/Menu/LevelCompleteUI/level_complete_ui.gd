@@ -4,8 +4,10 @@ signal next_level_requested
 signal exit_requested
 
 @onready var label: Label = $Label
-@onready var next_level_button: Button = $HBoxContainer/NextLevelButton
-@onready var exit_button: Button = $HBoxContainer/ExitButton
+@onready var next_level_focus_indicator: Label = $VBoxContainer/HBoxContainer/NextLevelFocusIndicator
+@onready var next_level_button: Button = $VBoxContainer/HBoxContainer/NextLevelButton
+@onready var exit_focus_indicator: Label = $VBoxContainer/HBoxContainer2/ExitFocusIndicator
+@onready var exit_button: Button = $VBoxContainer/HBoxContainer2/ExitButton
 @onready var player: AudioStreamPlayer = $AudioStreamPlayer
 
 var level_complete_music = preload("res://UI/Menu/LevelCompleteUI/Sound/Retro Music - WolfSynth - Tempo Normal - 02.wav")
@@ -17,6 +19,8 @@ func _ready():
 	hide()
 	next_level_button.hide()
 	exit_button.hide()
+	next_level_focus_indicator.modulate.a = 0.0
+	exit_focus_indicator.modulate.a = 0.0
 
 
 func _process(delta):
@@ -38,6 +42,7 @@ func show_buttons():
 	next_level_button.show()
 	exit_button.show()
 	next_level_button.grab_focus()
+	next_level_focus_indicator.modulate.a = 1.0
 
 
 func play_music():
@@ -56,9 +61,25 @@ func _input(event):
 			_on_exit_button_pressed()
 
 
+func _on_next_level_button_focus_entered():
+	next_level_focus_indicator.modulate.a = 1.0
+
+
+func _on_next_level_button_focus_exited():
+	next_level_focus_indicator.modulate.a = 0.0
+
+
 func _on_next_level_button_pressed():
 	player.stop()
 	next_level_requested.emit()
+
+
+func _on_exit_button_focus_entered():
+	exit_focus_indicator.modulate.a = 1.0
+
+
+func _on_exit_button_focus_exited():
+	exit_focus_indicator.modulate.a = 0.0
 
 
 func _on_exit_button_pressed():

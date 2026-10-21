@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bvwd6n3hgpfhp" path="res://UI/Background/background.tscn" id="1_2te3s"]
 [ext_resource type="Script" uid="uid://lhrn7mhc1kqw" path="res://UI/Menu/TitleScreen/title_screen.gd" id="1_qmakb"]
 [ext_resource type="Texture2D" uid="uid://d4nipkc57jwl5" path="res://Entities/Player/Art/PacMan.png" id="3_nibll"]
+[ext_resource type="Texture2D" uid="uid://dhjc0ioawloeq" path="res://UI/Menu/TitleScreen/Art/pacman_logo.png" id="3_sr3je"]
+[ext_resource type="FontFile" uid="uid://d2ttwhsaicnm3" path="res://Assets/Fonts/Silkscreen-Regular.ttf" id="4_qy3qn"]
 [ext_resource type="PackedScene" uid="uid://b2qd150pihxf" path="res://Entities/GhostVisual/ghost_visual.tscn" id="4_txoam"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_nibll"]
-font_size = 64
-
 [sub_resource type="LabelSettings" id="LabelSettings_txoam"]
+font = ExtResource("4_qy3qn")
 font_size = 24
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_txoam"]
@@ -48,10 +48,30 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oby23"]
+font = ExtResource("4_qy3qn")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_vhosg"]
+font = ExtResource("4_qy3qn")
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_qy3qn"]
+font = ExtResource("4_qy3qn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_g3wkg"]
+font = ExtResource("4_qy3qn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_811e8"]
+font = ExtResource("4_qy3qn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jduiq"]
+font = ExtResource("4_qy3qn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_yidpp"]
+font = ExtResource("4_qy3qn")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ejh1l"]
+font = ExtResource("4_qy3qn")
 
 [node name="TitleScreen" type="Control" unique_id=2055018755]
 layout_mode = 3
@@ -64,18 +84,13 @@ script = ExtResource("1_qmakb")
 layout_mode = 0
 color = Color(0, 0, 0, 1)
 
-[node name="TitleLabel" type="Label" parent="." unique_id=1030478953]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -137.0
-offset_top = 145.0
-offset_right = 137.0
-offset_bottom = 233.0
-grow_horizontal = 2
-text = "PACMAN"
-label_settings = SubResource("LabelSettings_nibll")
+[node name="TitleLogo" type="TextureRect" parent="." unique_id=522712967]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 151.0
+offset_right = 367.0
+offset_bottom = 247.0
+texture = ExtResource("3_sr3je")
 
 [node name="StartLabel" type="Label" parent="." unique_id=835765269]
 layout_mode = 1
@@ -160,14 +175,17 @@ layout_mode = 2
 [node name="MoveLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1843189652]
 layout_mode = 2
 text = "Move:"
+label_settings = SubResource("LabelSettings_qy3qn")
 
 [node name="SelectLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=350769643]
 layout_mode = 2
 text = "Select:"
+label_settings = SubResource("LabelSettings_g3wkg")
 
 [node name="PauseLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=823679590]
 layout_mode = 2
 text = "Pause:"
+label_settings = SubResource("LabelSettings_811e8")
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="VBoxContainer" unique_id=653902863]
 layout_mode = 2
@@ -175,14 +193,17 @@ layout_mode = 2
 [node name="MoveControlsLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1238867687]
 layout_mode = 2
 text = "Arrow Keys / WASD"
+label_settings = SubResource("LabelSettings_jduiq")
 
 [node name="SelectControlsLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=2128759404]
 layout_mode = 2
 text = "Enter / Space"
+label_settings = SubResource("LabelSettings_yidpp")
 
 [node name="PauseControlsLabel" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1241462187]
 layout_mode = 2
 text = "Esc / P"
+label_settings = SubResource("LabelSettings_ejh1l")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" unique_id=549474426]
 layout_mode = 2
